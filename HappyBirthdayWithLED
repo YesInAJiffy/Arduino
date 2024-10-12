@@ -1,0 +1,55 @@
+/*
+Circuit Diagram
+Connect the positive lead of the piezo buzzer to digital pin 8 and the negative lead to GND.
+Connect the anode (longer leg) of the LED to digital pin 9 and the cathode (shorter leg) to one end of a 220Ω resistor. Connect the other end of the resistor to GND.
+*/
+
+// Pin Definitions
+const int buzzerPin = 8;  // Pin connected to the piezo buzzer
+const int ledPin = 9;     // Pin connected to the LED
+
+// Notes for "Happy Birthday"
+#define NOTE_B4  494
+#define NOTE_C5  523
+#define NOTE_D5  587
+#define NOTE_E5  659
+#define NOTE_F5  698
+#define NOTE_G5  784
+
+// Melody notes for "Happy Birthday"
+int melody[] = {
+  NOTE_C5, NOTE_C5, NOTE_D5, NOTE_C5, NOTE_F5, NOTE_E5,  // Happy Birthday to You
+  NOTE_C5, NOTE_C5, NOTE_D5, NOTE_C5, NOTE_G5, NOTE_F5,  // Happy Birthday to You
+  NOTE_C5, NOTE_C5, NOTE_C6, NOTE_A5, NOTE_F5, NOTE_E5, NOTE_D5,  // Happy Birthday dear [Name]
+  NOTE_AS5, NOTE_AS5, NOTE_A5, NOTE_F5, NOTE_G5, NOTE_F5   // Happy Birthday to You
+};
+
+// Duration of each note (in milliseconds)
+int noteDuration = 500;  // Duration for each note
+
+void setup() {
+  pinMode(buzzerPin, OUTPUT);  // Set buzzer pin as output
+  pinMode(ledPin, OUTPUT);      // Set LED pin as output
+}
+
+void loop() {
+  // Play the melody
+  for (int thisNote = 0; thisNote < 24; thisNote++) {
+    // Calculate the note duration
+    int noteDuration = 500;  // Duration for each note (in ms)
+    
+    // Play the note
+    tone(buzzerPin, melody[thisNote], noteDuration);
+    
+    // Blink the LED
+    digitalWrite(ledPin, HIGH);  // Turn the LED on
+    delay(noteDuration);          // Wait for the duration of the note
+    digitalWrite(ledPin, LOW);   // Turn the LED off
+    
+    // Pause between notes
+    delay(50);
+  }
+  
+  // Add a delay before replaying the melody
+  delay(2000);  // Wait for 2 seconds before replaying
+}
