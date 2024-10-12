@@ -8,20 +8,22 @@ Connect the anode (longer leg) of the LED to digital pin 9 and the cathode (shor
 const int buzzerPin = 8;  // Pin connected to the piezo buzzer
 const int ledPin = 9;     // Pin connected to the LED
 
-// Notes for "Happy Birthday"
-#define NOTE_B4  494
+// Define frequencies for the notes
+#define NOTE_C4  261
 #define NOTE_C5  523
 #define NOTE_D5  587
 #define NOTE_E5  659
 #define NOTE_F5  698
 #define NOTE_G5  784
+#define NOTE_A5  880
+#define NOTE_B5  988
 
 // Melody notes for "Happy Birthday"
 int melody[] = {
   NOTE_C5, NOTE_C5, NOTE_D5, NOTE_C5, NOTE_F5, NOTE_E5,  // Happy Birthday to You
   NOTE_C5, NOTE_C5, NOTE_D5, NOTE_C5, NOTE_G5, NOTE_F5,  // Happy Birthday to You
   NOTE_C5, NOTE_C5, NOTE_C6, NOTE_A5, NOTE_F5, NOTE_E5, NOTE_D5,  // Happy Birthday dear [Name]
-  NOTE_AS5, NOTE_AS5, NOTE_A5, NOTE_F5, NOTE_G5, NOTE_F5   // Happy Birthday to You
+  NOTE_C6, NOTE_C6, NOTE_A5, NOTE_F5, NOTE_G5, NOTE_F5   // Happy Birthday to You
 };
 
 // Duration of each note (in milliseconds)
@@ -35,9 +37,6 @@ void setup() {
 void loop() {
   // Play the melody
   for (int thisNote = 0; thisNote < 24; thisNote++) {
-    // Calculate the note duration
-    int noteDuration = 500;  // Duration for each note (in ms)
-    
     // Play the note
     tone(buzzerPin, melody[thisNote], noteDuration);
     
@@ -50,6 +49,6 @@ void loop() {
     delay(50);
   }
   
-  // Add a delay before replaying the melody
+  // Add a delay before the melody can be played again
   delay(2000);  // Wait for 2 seconds before replaying
 }
