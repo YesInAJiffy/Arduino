@@ -1,0 +1,77 @@
+/*
+Note Definitions: Frequencies for the notes C4, D4, E4, etc., are defined.
+Melody Array: This array stores the sequence of notes that make up "Twinkle Twinkle Little Star."
+Note Durations: This array corresponds to how long each note is played.
+tone() Function: The tone() function generates a square wave of a specific frequency on the specified pin.
+noTone() Function: The noTone() function stops the sound on the specified pin.
+*/
+
+/* SETUP 
+PIN8 +ve of speaker
+GND -ve of speaker
+*/
+
+// Define the notes and their corresponding frequencies
+#define NOTE_C4  262  // C4
+#define NOTE_D4  294  // D4
+#define NOTE_E4  330  // E4
+#define NOTE_F4  349  // F4
+#define NOTE_G4  392  // G4
+#define NOTE_A4  440  // A4
+#define NOTE_B4  494  // B4
+
+// Complete melody for "Twinkle Twinkle Little Star"
+int melody[] = {
+  NOTE_C4, NOTE_C4, NOTE_G4, NOTE_G4, 
+  NOTE_A4, NOTE_A4, NOTE_G4, NOTE_F4, 
+  NOTE_F4, NOTE_E4, NOTE_E4, NOTE_D4, 
+  NOTE_D4, NOTE_C4,
+  
+  NOTE_G4, NOTE_G4, NOTE_F4, NOTE_F4, 
+  NOTE_E4, NOTE_E4, NOTE_D4, 
+  NOTE_G4, NOTE_G4, NOTE_F4, NOTE_F4, 
+  NOTE_E4, NOTE_E4, NOTE_D4,
+  
+  NOTE_C4, NOTE_C4, NOTE_G4, NOTE_G4, 
+  NOTE_A4, NOTE_A4, NOTE_G4, NOTE_F4, 
+  NOTE_F4, NOTE_E4, NOTE_E4, NOTE_D4, 
+  NOTE_D4, NOTE_C4,
+};
+
+// Duration of each note in milliseconds
+int noteDurations[] = {
+  400, 400, 400, 400, 
+  400, 400, 800, 400, 
+  400, 400, 400, 400, 
+  400, 800,
+  
+  400, 400, 400, 400, 
+  400, 400, 800, 
+  400, 400, 400, 400, 
+  400, 400, 800,
+  
+  400, 400, 400, 400, 
+  400, 400, 800, 400, 
+  400, 400, 400, 400, 
+  400, 800,
+};
+
+void setup() {
+  // No setup necessary
+}
+
+void loop() {
+  for (int thisNote = 0; thisNote < sizeof(melody) / sizeof(melody[0]); thisNote++) {
+    int noteDuration = noteDurations[thisNote];
+    tone(8, melody[thisNote], noteDuration); // Play the note on pin 8
+
+    // Pause between notes
+    int pauseBetweenNotes = noteDuration * 1.30; // Adjust pause duration
+    delay(pauseBetweenNotes);
+
+    // Stop the tone playing:
+    noTone(8);
+  }
+  
+  delay(2000); // Wait for a while before looping the melody again
+}
