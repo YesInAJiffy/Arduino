@@ -17,6 +17,7 @@ const int ledPin = 9;     // Pin connected to the LED
 #define NOTE_G5  784
 #define NOTE_A5  880
 #define NOTE_B5  988
+#define NOTE_C6  1047 // Added NOTE_C6
 
 // Melody notes for "Happy Birthday"
 int melody[] = {
